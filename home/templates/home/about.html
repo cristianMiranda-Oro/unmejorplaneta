@@ -1,0 +1,20 @@
+{%extends "base_plantilla.html" %}
+
+{%block nav%} 
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'home' %}"><i class="fas fa-home fa-lg"></i>Home <span class="sr-only">(current)</span></a>
+</li>
+
+<li class="nav-item ">
+    <a class="nav-link" href="{% url 'forum' %}"><i class="fab fa-wpforms fa-lg"></i>Forum</a>
+</li>
+
+<li class="nav-item active">
+    <a class="nav-link" href="{% url 'about' %}"><i class="fas fa-info fa-lg"></i>About</a>
+</li>
+{%endblock%}
+
+{%block content%} 
+<p>section about</p>
+{%endblock%}
+

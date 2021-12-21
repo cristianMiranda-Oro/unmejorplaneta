@@ -14,3 +14,11 @@ class HomeView(View):
             'islocal': islocal
         }
         return render(request, 'home/index.html', contex)
+
+class AboutView(View):
+    def get(self, request):
+        return render(request, 'home/about.html')
+
+class ForumView(View):
+    def get(self, request):
+        return render(request, 'home/forum.html')
