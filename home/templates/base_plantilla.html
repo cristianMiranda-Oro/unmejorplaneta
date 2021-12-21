@@ -25,28 +25,55 @@
 
     <body>
 
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <a class="navbar-brand" href="#">
-                <img src="{% static 'images/simbol.png' %}" height="30" width="41" alt="page simbol">
-            </a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
 
-                    {%block nav%} {%endblock%}
+        <div class="container" style="max-width:100%;">
 
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
+            <div class="row">
+                <div class="col col-sm-1" style="background:rgb(0,43,0);">
 
-                </ul>
+                </div>
+                <div class="col col-sm-10 ml-0 navbar-primario" style="padding:0;font-size:150%;">
+
+                    <nav class="navbar navbar-expand-lg">
+            
+                        <a class="navbar-brand" href="#">
+                            <img src="{% static 'images/simbol.png' %}" width="90" alt="page simbol">
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto">
+            
+                                {%block nav%} {%endblock%}
+            
+                                
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#"><i class="fas fa-home fa-lg"></i>Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="#"><i class="fab fa-wpforms fa-lg"></i>Forum</a>
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><i class="fas fa-info fa-lg"></i>About</a>
+                                </li>
+            
+                            </ul>
+                        </div>
+                    </nav>
+                    
+
+                </div>
+                <div class="col col-sm-1 ml-0" style="background:black;background:rgb(0,43,0);">
+
+                </div>
             </div>
-        </nav>
+
+        </div>
+
+        
 
         {%block content%} {%endblock%}
 
