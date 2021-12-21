@@ -1,3 +1,5 @@
+{%load static%}
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,10 +10,12 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         
-        <!-- reference your copy Font Awesome here (from our CDN or by hosting yourself) -->
-        <link href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
-        <link href="/your-path-to-fontawesome/css/brands.css" rel="stylesheet">
-        <link href="/your-path-to-fontawesome/css/solid.css" rel="stylesheet">
+        <!--fontawesome-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+
+        <!--custom css-->
+        <link rel="stylesheet" href="{% static 'css/style_base.css' %}">
 
 
         <title>{%block title%}{%endblock%}</title>
@@ -20,6 +24,29 @@
     </head>
 
     <body>
+
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'images/simbol.png' %}" height="30" width="41" alt="page simbol">
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+
+                    {%block nav%} {%endblock%}
+
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
 
         {%block content%} {%endblock%}
 
