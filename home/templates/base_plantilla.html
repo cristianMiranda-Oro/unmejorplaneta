@@ -14,6 +14,9 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
 
+        <!--Bootstrap social-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.css">
+
         <!--custom css-->
         <link rel="stylesheet" href="{% static 'css/style_base.css' %}">
 
@@ -39,7 +42,9 @@
                             <img src="{% static 'images/simbol.png' %}" width="90" alt="page simbol">
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
+                            <span class="navbar-toggler-icon" style="color:white; font-size: 150%;">
+                                <i class="fas fa-bars fa-lg"></i>
+                            </span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mr-auto">
@@ -62,12 +67,33 @@
 
         {%block content%} {%endblock%}
 
-        <footer>
+        <footer class="footer" style="padding-top:5%">
+
             <div class="container">
 
                 <div class="row">
 
-                    
+                    <div class="col-7 col-sm-5 offset-sm-1">
+                        <h5>Our Address</h5>
+                        <address>
+                          Street 18, silicon valley<br>
+                          Barrancabermeja, Colombia<br>
+                          <i class="fa fa-phone fa-lg"></i> +57 3046708844<br>
+                          <i class="fa fa-envelope fa-lg"></i> <a href="mailto:cristian-m-o@hotmail.com">cristian-m-o@hotmail.com</a>
+                       </address>
+                    </div>
+
+                    <div class="col-12 col-sm-4 align-self-center">
+                        <div class="text-center">
+                            <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fa fa-google-plus fa-lg"></i></a>
+                            <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-facebook fa-lg"></i></a>
+                            <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i class="fa fa-linkedin fa-lg"></i></a>
+                            <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter fa-lg"></i></a>
+                            <a class="btn btn-social-icon btn-google" href="http://youtube.com/"><i class="fa fa-youtube fa-lg"></i></a>
+                            <a class="btn btn-social-icon btn-google" href="mailto:"><i class="fa fa-envelope-o fa-lg"></i></a>
+                        </div>
+                    </div>
+
                 </div>
 
 
@@ -78,6 +104,7 @@
                </div>
 
             </div>
+
         </footer>
 
 

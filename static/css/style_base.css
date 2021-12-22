@@ -1,5 +1,6 @@
 .navbar-primario {
     background:rgb(0,43,0)!important;
+    
 }
 
 nav li a {
@@ -14,3 +15,7 @@ nav li a:hover {
     color: white;
 }
 
+footer {
+    background:rgb(0,43,0);
+    color:white;
+}
