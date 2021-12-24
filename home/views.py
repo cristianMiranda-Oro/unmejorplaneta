@@ -42,18 +42,28 @@ class ForumView(View):
         comment.save()
         return redirect(reverse('forum'))
 
+    def delete(self, request, comment_id):
+        comment = get_object_or_404(Comment, pk=comment_id)
+        comment.delete()
+        return redirect(reverse('forum'))
 
-class CommentCreateView(LoginRequiredMixin, View):
-    def post(self, request):
-        comment = Comment(text=request.POST['comment'], owner=request.user)
-        comment.save()
-        return redirect(reverse('home:forum'))
+
+#class CommentCreateView(LoginRequiredMixin, View):
+#    def post(self, request):
+#        comment = Comment(text=request.POST['comment'], owner=request.user)
+#        comment.save()
+#        return redirect(reverse('home:forum'))
 
 class CommentDeleteView(LoginRequiredMixin, View):
     model = Comment
     #template_name = 'home/forum.html' #Probar esto
 
-    def get_success_url(self):
-        forum = self.object.forum
-        return reverse('home:forum')
+    def get(self, request, pk):
+        comment = get_object_or_404(Comment, pk=pk)
+        comment.delete()
+        return redirect(reverse('forum'))
+
+    #def get_success_url(self):
+    #    forum = self.object.forum
+    #    return reverse('forum')
 

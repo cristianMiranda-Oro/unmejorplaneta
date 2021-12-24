@@ -41,7 +41,7 @@
 ({{comment.updated_at|naturaltime}})
 
 {%if user == comment.owner%}
-    <a href="#">
+    <a href="{% url 'forum_comment_delete' comment.id %}">
         <i class="fa fa-trash"></i>
     </a>
 {%endif%}
