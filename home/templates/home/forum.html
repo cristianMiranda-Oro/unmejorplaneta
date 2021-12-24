@@ -1,5 +1,6 @@
 {%extends "base_plantilla.html" %}
 {% load humanize %}
+{%load static%}
 
 {%block nav%} 
 <li class="nav-item">
@@ -17,38 +18,70 @@
 
 {%block content%} 
 
-<h2>
-    ¿Como podemos ayudar al medio ambiente?
-</h2>
+<div class="container">
 
-{%if user.is_authenticated%}
+    <div class="row justify-content-center mt-5">
+        <div class="alert alert-success" role="alert" style="font-size: 200%">
+            ¿Cómo podemos ayudar al medio ambiente?
+        </div>
+        
+    </div>
 
-    <form method="post" action="">
-        {% csrf_token %}
-        {{comment_form}}
+    <div class="row">
+        
+        <div class="col-sm-5 col-md-6 col-12 pb-4">
 
-        <input type="submit" value="Submit">
-        <input type="reset" value="Reset">
+            <h3>Comentarios</h3>
 
-    </form>
+            <div class="container">
 
-{%endif%}
+                {%for comment in comments%}
+                <div class="row">
 
-<div>
-{%for comment in comments%}
+                    <div class="comment mt-4 text-justify float-left"> <img src="{% static 'images/avatarinco.png' %}" alt="" class="rounded-circle" width="40" height="40">
+                        
+                        <h4>{{comment.owner}}</h4> <span>- {{comment.updated_at|naturaltime}} </span> 
+                        <span> 
+                            {%if user == comment.owner%}
+                            <a href="{% url 'forum_comment_delete' comment.id %}">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                            {%endif%}
+                        </span><br>
+                        <p>{{comment.text}}</p>
+                        
 
-<p> {{comment.text}}
-({{comment.updated_at|naturaltime}})
+                    </div>
+                
+                </div>
+                
+                {%endfor%}
 
-{%if user == comment.owner%}
-    <a href="{% url 'forum_comment_delete' comment.id %}">
-        <i class="fa fa-trash"></i>
-    </a>
-{%endif%}
-</p>
+            </div>
 
-{%endfor%}
+        </div>
+
+        <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
+            <form method="post" id="algin-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <h4>Leave a comment</h4> <label for="message">Message</label>
+                    <textarea name="comment" id="id_comment" cols="30" rows="5" class="form-control"  maxlength="500" minlength="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <p class="text-secondary">Para participar en este foro debe estar <a href="#" class="alert-link">registrado</a> de lo contrario no podrá participar.</p>
+                </div>
+                <div class="form-inline"> <input type="checkbox" name="check" id="checkbx" class="mr-1"> <label for="subscribe">Subscribe me to the newlettter</label> </div>
+                {%if user.is_authenticated%}
+                    <div class="form-group"> <button type="submit" id="post" class="btn" value="Submit">Post Comment</button> </div>
+                {%endif%}
+            </form>
+        </div>
+
+    </div>
+
 </div>
+
 
 
 {%endblock%}

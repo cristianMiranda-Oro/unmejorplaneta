@@ -24,16 +24,22 @@ class HomeView(View):
 
 class AboutView(View):
     def get(self, request):
-        return render(request, 'home/about.html')
+        contex = {
+            'form': AuthenticationForm
+        }
+        return render(request, 'home/about.html', contex)
 
 class ForumView(View):
     
     def get(self, request):
+        #print(request.user)
         comments = Comment.objects.all().order_by('-updated_at')
         comment_form = CommentForm()
+        print(CommentForm())
         contex = {
             'comments': comments,
             'comment_form': comment_form,
+            'form': AuthenticationForm
         }
         return render(request, 'home/forum.html', contex)
     
