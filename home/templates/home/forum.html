@@ -1,4 +1,5 @@
 {%extends "base_plantilla.html" %}
+{% load humanize %}
 
 {%block nav%} 
 <li class="nav-item">
@@ -15,5 +16,39 @@
 {%endblock%}
 
 {%block content%} 
-<p>section forum</p>
+
+<h2>
+    ¿Como podemos ayudar al medio ambiente?
+</h2>
+
+{%if user.is_authenticated%}
+
+    <form method="post" action="">
+        {% csrf_token %}
+        {{comment_form}}
+
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+
+    </form>
+
+{%endif%}
+
+<div>
+{%for comment in comments%}
+
+<p> {{comment.text}}
+({{comment.updated_at|naturaltime}})
+
+{%if user == comment.owner%}
+    <a href="#">
+        <i class="fa fa-trash"></i>
+    </a>
+{%endif%}
+</p>
+
+{%endfor%}
+</div>
+
+
 {%endblock%}

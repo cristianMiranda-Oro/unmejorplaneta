@@ -1,7 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.conf import settings
 from django.contrib.auth.forms import AuthenticationForm
+
+from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from home.models import Comment
+from home.forms import CommentForm
 # Create your views here.
 
 class HomeView(View):
@@ -21,5 +27,33 @@ class AboutView(View):
         return render(request, 'home/about.html')
 
 class ForumView(View):
+    
     def get(self, request):
-        return render(request, 'home/forum.html')
+        comments = Comment.objects.all().order_by('-updated_at')
+        comment_form = CommentForm()
+        contex = {
+            'comments': comments,
+            'comment_form': comment_form,
+        }
+        return render(request, 'home/forum.html', contex)
+    
+    def post(self, request):
+        comment = Comment(text=request.POST['comment'], owner=request.user)
+        comment.save()
+        return redirect(reverse('forum'))
+
+
+class CommentCreateView(LoginRequiredMixin, View):
+    def post(self, request):
+        comment = Comment(text=request.POST['comment'], owner=request.user)
+        comment.save()
+        return redirect(reverse('home:forum'))
+
+class CommentDeleteView(LoginRequiredMixin, View):
+    model = Comment
+    #template_name = 'home/forum.html' #Probar esto
+
+    def get_success_url(self):
+        forum = self.object.forum
+        return reverse('home:forum')
+
