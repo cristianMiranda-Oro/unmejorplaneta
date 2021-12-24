@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from django.conf import settings
-
+from django.contrib.auth.forms import AuthenticationForm
 # Create your views here.
 
 class HomeView(View):
@@ -11,7 +11,8 @@ class HomeView(View):
         islocal = host.find('localhost') >= 0 or host.find('127.0.0.1') >= 0
         contex = {
             'installed': settings.INSTALLED_APPS,
-            'islocal': islocal
+            'islocal': islocal,
+            'form': AuthenticationForm
         }
         return render(request, 'home/index.html', contex)
 
