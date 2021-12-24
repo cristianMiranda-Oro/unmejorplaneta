@@ -1,5 +1,5 @@
 {%load static%}
-
+{% load app_tags %} <!-- see home/templatetags/app_tags.py and dj4e-samples/settings.py -->
 <!DOCTYPE html>
 <html>
     <head>
@@ -51,72 +51,96 @@
             
                                 {%block nav%} {%endblock%}
                                 
-                                <li class="nav-item">
+            
+                            </ul>
 
-                                    <!--Button trigger modal Login-->
-
-                                    
-
-                                    <div class="button-login">
-                                        <button type="button" class="btn" data-toggle="modal" data-target="#loginModal" >
-                                            <i class="fas fa-sign-in-alt fa-lg"></i> Login
-                                        </button>
-                                    <div>
-                                    <!-- Modal Login-->
-                                    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Login</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
+                            <ul class="nav navbar-nav navbar-right">
 
 
+                                
+                                
+                                {% if user.is_authenticated %}
+                                
+                                <li class="dropdown">
+                                    <!-- gravatar depends on app_tags being loaded -->
+                                    <!-- https://brobin.me/blog/2016/07/super-simple-django-gravatar/ -->
+                                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                                        <img style="width: 45px;" src="{{ user|gravatar:60 }}"/><b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{% url 'logout' %}?next={% url 'home' %}">Logout</a></li>
+                                    </ul>
+                                </li>
 
-                                                    {% if form.errors %}
-                                                        <p>Your username and password didn't match. Please try again.</p>
-                                                    {% endif %}
-                                                    
-                                                    {% if next %}
-                                                        {% if user.is_authenticated %}
-                                                        <p>Your account doesn't have access to this page. To proceed,
-                                                        please login with an account that has access.</p>
-                                                        {% else %}
-                                                        <p>Please login to see this page.</p>
+                                {% else %}
+
+                                    <li class="nav-item">
+
+                                        <!--Button trigger modal Login-->
+                                        <div class="button-login">
+                                            <button type="button" class="btn" data-toggle="modal" data-target="#loginModal" >
+                                                <i class="fas fa-sign-in-alt fa-lg"></i> Login
+                                            </button>
+                                        <div>
+                                        
+                                        <!-- Modal Login-->
+                                        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+    
+    
+    
+                                                        {% if form.errors %}
+                                                            <p>Your username and password didn't match. Please try again.</p>
                                                         {% endif %}
-                                                    {% endif %}
+                                                        
+                                                        {% if next %}
+                                                            {% if user.is_authenticated %}
+                                                            <p>Your account doesn't have access to this page. To proceed,
+                                                            please login with an account that has access.</p>
+                                                            {% else %}
+                                                            <p>Please login to see this page.</p>
+                                                            {% endif %}
+                                                        {% endif %}
+                                                        
+                                                        <form method="post" action="{% url 'login' %}">
+                                                            {% csrf_token %}
+                                                            <table>
+                                                            <tr>
+                                                                <td>{{ form.username.label_tag }}</td>
+                                                                <td>{{ form.username }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>{{ form.password.label_tag }}</td>
+                                                                <td>{{ form.password }}</td>
+                                                            </tr>
+                                                            </table>
+                                                            <input type="submit" value="login" />
+                                                            <input type="hidden" name="next" value="{{ next }}" />
+                                                        </form>
                                                     
-                                                    <form method="post" action="{% url 'login' %}">
-                                                        {% csrf_token %}
-                                                        <table>
-                                                        <tr>
-                                                            <td>{{ form.username.label_tag }}</td>
-                                                            <td>{{ form.username }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>{{ form.password.label_tag }}</td>
-                                                            <td>{{ form.password }}</td>
-                                                        </tr>
-                                                        </table>
-                                                        <input type="submit" value="login" />
-                                                        <input type="hidden" name="next" value="{{ next }}" />
-                                                    </form>
-                                                
-
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                </li>
-            
-                            </ul>
+                                    </li>
+
+                                {% endif %}
+
+                              </ul>
+
                         </div>
                     </nav>
 

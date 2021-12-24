@@ -20,10 +20,11 @@ footer {
     color:white;
 }
 
+/*
 .button-login{
     
     margin-left: calc(100vw*0.4 - 50px);;
-}
+}*/
 
 .button-login button{
     background-color: rgb(125, 240, 125); 
