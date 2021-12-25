@@ -35,7 +35,7 @@ class ForumView(View):
         #print(request.user)
         comments = Comment.objects.all().order_by('-updated_at')
         comment_form = CommentForm()
-        print(CommentForm())
+        #print(CommentForm())
         contex = {
             'comments': comments,
             'comment_form': comment_form,
